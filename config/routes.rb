@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :meal_items, except: [:new, :edit]
+  resources :meals, except: [:new, :edit]
   resources :foods, except: [:new, :edit]
   resources :examples, except: [:new, :edit]
   post '/sign-up' => 'users#signup'

@@ -41,9 +41,6 @@ RSpec.describe 'Foods API' do
       expect(response).to be_success
 
       foods_response = JSON.parse(response.body)
-      p foods_response
-      p foods_response.length
-      p foods.count
       expect(foods_response.length).to eq(foods.count)
       expect(foods_response['desc']).to eq(food['new food'])
     end
@@ -75,17 +72,14 @@ RSpec.describe 'Foods API' do
 
     it 'updates a food' do
       patch "/foods/#{food.id}", food: food_diff, format: :json
-      p food
       expect(response).to be_success
-      p response
       foods_response = JSON.parse(response.body)
-      p foods_response
       expect(foods_response['food']['desc']).to eq(food_diff[:desc])
     end
   end
 
   describe 'DELETE /foods/:id' do
-    skip 'deletes an food' do
+    it 'deletes an food' do
       delete "/foods/#{food.id}"
       expect(response).to be_success
     end

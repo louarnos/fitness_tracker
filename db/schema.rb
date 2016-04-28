@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160427201733) do
+ActiveRecord::Schema.define(version: 20160428150154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,26 @@ ActiveRecord::Schema.define(version: 20160427201733) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "meal_items", force: :cascade do |t|
+    t.integer  "serv_qty"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "food_for_meal_id"
+    t.integer  "user_meal_id"
+  end
+
+  add_index "meal_items", ["food_for_meal_id"], name: "index_meal_items_on_food_for_meal_id", using: :btree
+  add_index "meal_items", ["user_meal_id"], name: "index_meal_items_on_user_meal_id", using: :btree
+
+  create_table "meals", force: :cascade do |t|
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
+  add_index "meals", ["user_id"], name: "index_meals_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
     t.string   "token",           null: false
@@ -54,4 +74,7 @@ ActiveRecord::Schema.define(version: 20160427201733) do
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
   add_foreign_key "examples", "users"
+  add_foreign_key "meal_items", "foods", column: "food_for_meal_id"
+  add_foreign_key "meal_items", "meals", column: "user_meal_id"
+  add_foreign_key "meals", "users"
 end
