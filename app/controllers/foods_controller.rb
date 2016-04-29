@@ -3,6 +3,13 @@ class FoodsController < ApplicationController
 
   # GET /foods
   # GET /foods.json
+  def search_by_key
+    @food = Food.search_by_key(params[:search_key])
+
+    render json: @food
+  end
+
+
   def index
     @foods = Food.all
 

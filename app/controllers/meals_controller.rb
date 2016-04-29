@@ -1,4 +1,4 @@
-class MealsController < ApplicationController
+class MealsController < ProtectedController
   before_action :set_meal, only: [:show, :update, :destroy]
 
   # GET /meals
@@ -12,13 +12,14 @@ class MealsController < ApplicationController
   # GET /meals/1
   # GET /meals/1.json
   def show
-    render json: @meal
+    render json: Meal.find(params[:id])
   end
 
   # POST /meals
   # POST /meals.json
   def create
-    @meal = Meal.new(meal_params)
+    # binding.pry
+    @meal = current_user.meals.build(meal_params)
 
     if @meal.save
       render json: @meal, status: :created, location: @meal
@@ -47,13 +48,13 @@ class MealsController < ApplicationController
     head :no_content
   end
 
-  private
+  def set_meal
+    @meal = current_user.meals.find(params[:id])
+  end
 
-    def set_meal
-      @meal = Meal.find(params[:id])
-    end
+  def meal_params
+    params.require(:meal).permit(:meal_type, :meal_items, :food_for_meals)
+  end
 
-    def meal_params
-      params.require(:meal).permit(:user_id, :meal_item_id, :type)
-    end
+  private :set_meal, :meal_params
 end

@@ -6,6 +6,7 @@ gem 'rails-api'
 gem 'active_model_serializers', '= 0.10.0.rc4'
 gem 'rack-cors', require: 'rack/cors'
 gem 'pg'
+gem 'httparty'
 gem 'bcrypt', '~> 3.1.11'
 
 group :production do

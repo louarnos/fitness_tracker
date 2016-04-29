@@ -4,7 +4,6 @@ class CreateMealItems < ActiveRecord::Migration
       t.integer :serv_qty
 
       t.timestamps null: false
-      
     end
   end
 end

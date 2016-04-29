@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428150154) do
+ActiveRecord::Schema.define(version: 20160428193656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20160428150154) do
   add_index "meal_items", ["user_meal_id"], name: "index_meal_items_on_user_meal_id", using: :btree
 
   create_table "meals", force: :cascade do |t|
-    t.string   "type"
+    t.string   "meal_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
