@@ -1,5 +1,4 @@
-TOKEN='BAhJIiViZGVjNDE1ZWJlNmRhNzgyYjdkMmJlZTQwOTczMjY2MwY6BkVG--d1fde39b99e61e192bbc69ce6788fbceb3aa4fb5'
-ID='1'
-curl --include --request GET http://localhost:3000/meals/$ID \
+TOKEN='BAhJIiU4YmRkMjNjODI2YTM0NDI2YjFmNzY4NzZlYzI4NTdlNwY6BkVG--2bda74e0a0ee5424b6317009808b33c4eaeb01cc'
+curl --include --request GET http://localhost:3000/meals/ \
   --header "Authorization: Token token=$TOKEN" \
   --header "Content-Type: application/json" \

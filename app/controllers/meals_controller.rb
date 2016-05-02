@@ -4,8 +4,7 @@ class MealsController < ProtectedController
   # GET /meals
   # GET /meals.json
   def index
-    @meals = Meal.all
-
+    @meals = current_user.meals
     render json: @meals
   end
 
@@ -31,7 +30,7 @@ class MealsController < ProtectedController
   # PATCH/PUT /meals/1
   # PATCH/PUT /meals/1.json
   def update
-    @meal = Meal.find(params[:id])
+    # @meal = Meal.find(params[:id])
 
     if @meal.update(meal_params)
       render json: @meal, status: :ok
