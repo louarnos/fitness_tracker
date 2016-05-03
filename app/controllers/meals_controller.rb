@@ -1,5 +1,6 @@
 class MealsController < ProtectedController
   before_action :set_meal, only: [:show, :update, :destroy]
+  # accepts_nested_attributes_for :meal_items, :food_for_meals
 
   # GET /meals
   # GET /meals.json
@@ -30,7 +31,7 @@ class MealsController < ProtectedController
   # PATCH/PUT /meals/1
   # PATCH/PUT /meals/1.json
   def update
-    # @meal = Meal.find(params[:id])
+    @meal = Meal.find(params[:id])
 
     if @meal.update(meal_params)
       render json: @meal, status: :ok

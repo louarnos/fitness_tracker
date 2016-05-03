@@ -1,10 +1,13 @@
-TOKEN='BAhJIiUwMjcyYTY1NDQ3Zjg4MjMxMDU1MTg0N2JlYmEzZjNlYgY6BkVG--afa066fa7beed099df43ce58aae9abe8119565f8'
+TOKEN='BAhJIiU2ZjA5YWUzYmNkMzc4ZjFhZjc5Y2ZjNzU4M2ZjZTcxZQY6BkVG--bd4a857908df5f3bc9015aa3e7b2cf89cb710c79'
 
-curl --include --request POST http://localhost:3000/meals \
-  --header "Authorization: Token token=$TOKEN" \
+curl --include --request POST http://localhost:3000/meal_items \
   --header "Content-Type: application/json" \
   --data '{
-    "meal" : {
-    "meal_type" : "test type"
+    "meal_item" : {
+    "food_for_meal_id" : "4",
+    "user_meal_id" : "45"
   }
 }'
+
+
+  --header "Authorization: Token token=$TOKEN" \

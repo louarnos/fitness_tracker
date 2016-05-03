@@ -30,7 +30,7 @@ class MealItemsController < ApplicationController
   # PATCH/PUT /meal_items/1
   # PATCH/PUT /meal_items/1.json
   def update
-    @meal_item = MealItem.find(params[:id])
+    @meal_item = MealItem.find(params[:meal_id])
 
     if @meal_item.update(meal_item_params)
       render json: @meal_item, status: :ok
@@ -54,6 +54,6 @@ class MealItemsController < ApplicationController
     end
 
     def meal_item_params
-      params.require(:meal_item).permit(:food_id, :meal_id, :serv_qty)
+      params.require(:meal_item).permit(:food_for_meal_id, :user_meal_id, :serv_qty)
     end
 end

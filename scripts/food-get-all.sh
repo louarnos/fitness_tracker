@@ -1,1 +1,1 @@
-curl --include --request GET http://localhost:3000/foods?calories=59
+curl --include --request GET http://localhost:3000/foods/1

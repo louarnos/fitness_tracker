@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   delete '/sign-out/:id' => 'users#signout'
   patch '/change-password/:id' => 'users#changepw'
   patch '/meals/:id' => 'meals#update'
+  get '/foods/:sodium' => 'foods#index'
   resources :users, only: [:index, :show]
 end
