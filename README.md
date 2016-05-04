@@ -1,265 +1,146 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
-
-# rails-api-template
-
-A template for starting projects with `rails-api`. Includes authentication.
-
-At the beginning of each cohort, update the versions in [`Gemfile`](Gemfile).
-
-## Dependencies
-
-Install with `bundle install`.
-
--   [`rails-api`](https://github.com/rails-api/rails-api)
--   [`rails`](https://github.com/rails/rails)
--   [`active_model_serializers`](https://github.com/rails-api/active_model_serializers)
--   [`ruby`](https://www.ruby-lang.org/en/)
--   [`postgres`](http://www.postgresql.org)
-
-Until Rails 5 is released, this template should follow the most recent released
-version of Rails 4, as well as track `master` branches for `rails-api` and
-`active_model_serializers`.
-
-## Installation
-
-1.  [Download](../../archive/master.zip) this template.
-1.  Unzip and rename the template directory.
-1.  Empty [`README.md`](README.md) and fill with your own content.
-1.  Move into the new project and `git init`.
-1.  Install dependencies with `bundle install`.
-1.  Rename your app module in `config/application.rb` (change
-    `RailsApiTemplate`).
-1.  Rename your project database in `config/database.yml` (change
-    `'rails-api-template'`).
-1.  Make new `development` and `test` secrets for `config/secrets.yml`. Add and
-    commit this file.
-1.  Setup your database with `bin/rake db:nuke_pave` or `bundle exec rake
-    db:nuke_pave`.
-1.  Run the API server with `bin/rails server` or `bundle exec rails server`.
-
-## Structure
-
-This template follows the standard project structure in Rails 4.
-
-`curl` command scripts are stored in [`scripts`](scripts) with names that
-correspond to API actions.
-
-User authentication is built-in.
-
-## Tasks
-
-Developers should run these often!
-
--   `rake routes` lists the endpoints available in your API.
--   `rake test` runs automated tests.
--   `rails console` opens a REPL that pre-loads the API.
--   `rails db` opens your database client and loads the correct database.
--   `rails server` starts the API.
--   `scripts/*.sh` run various `curl` commands to test the API. See below.
-
-<!-- TODO -   `rake nag` checks your code style. -->
-<!-- TODO -   `rake lint` checks your code for syntax errors. -->
-
-## API
-
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
-
-Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
-own scripts to test your custom API. As an alternative, you can write automated
-tests in RSpec to test your API.
-
-### Authentication
-
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password/:id` | `users#changepw`  |
-| DELETE | `/sign-out/:id`        | `users#signout`   |
-
-#### POST /sign-up
-
-Request:
-
-```sh
-curl --include --request POST http://localhost:3000/sign-up \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password",
-      "password_confirmation": "an example password"
-    }
-  }'
-```
-
-```sh
-scripts/sign-up.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email"
-  }
-}
-```
-
-#### POST /sign-in
-
-Request:
-
-```sh
-curl --include --request POST http://localhost:3000/sign-in \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password"
-    }
-  }'
-```
-
-```sh
-scripts/sign-in.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email",
-    "token": "33ad6372f795694b333ec5f329ebeaaa"
-  }
-}
-```
-
-#### PATCH /change-password/:id
-
-Request:
-
-```sh
-curl --include --request PATCH http://localhost:3000/change-password/$ID \
-  --header "Authorization: Token token=$TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "passwords": {
-      "old": "an example password",
-      "new": "super sekrit"
-    }
-  }'
-```
-
-```sh
-ID=1 TOKEN=33ad6372f795694b333ec5f329ebeaaa scripts/change-password.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-#### DELETE /sign-out/:id
-
-Request:
-
-```sh
-curl --include --request DELETE http://localhost:3000/sign-out/$ID \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-ID=1 TOKEN=33ad6372f795694b333ec5f329ebeaaa scripts/sign-out.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-### Users
-
-| Verb | URI Pattern | Controller#Action |
-|------|-------------|-------------------|
-| GET  | `/users`    | `users#index`     |
-| GET  | `/users/1`  | `users#show`      |
-
-#### GET /users
-
-Request:
-
-```sh
-curl --include --request GET http://localhost:3000/users \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa scripts/users.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "users": [
-    {
-      "id": 2,
-      "email": "another@example.email"
-    },
-    {
-      "id": 1,
-      "email": "an@example.email"
-    }
-  ]
-}
-```
-
-#### GET /users/:id
-
-Request:
-
-```sh
-curl --include --request GET http://localhost:3000/users/$ID \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-ID=2 TOKEN=33ad6372f795694b333ec5f329ebeaaa scripts/user.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 2,
-    "email": "another@example.email"
-  }
-}
-```
-
-## [License](LICENSE)
-
-Source code distributed under the MIT license. Text and other assets copyright
-General Assembly, Inc., all rights reserved.
+# What is Fitness Food Tracker?
+
+Fitness Food tracker is an app that allows users to create, store, and recall meals with access to a database of over 8000 foods. The nutritional information in the foods table was distributed by the USDA. Foods have attributes of a description, grams per serving, calories per serving, carbs, monosaturated fats, polysaturated fats, saturated fats, sugars, protein, sodium, cholesterol, and fiber.
+
+# Technologies Used
+
+Front End: [Repo](https://github.com/louarnos/FitnessTrackerFrontEnd)
+ - Javascript
+ - HTML
+ - CSS
+ - Jquery
+ - Handlebars.js
+ 
+Back End: 
+ - Ruby
+ - Rails
+ - Postgres
+ - SQL
+
+# Database Structure
+
+There are four tables:
+  - Users
+  - Meals 
+    - Foreign Key of User
+  - Meal_items -- Joined table 
+    - Foreign Keys of Meal and Food
+  - Foods
+    
+Users have many meals. Meals have many foods through meal_items. 
+
+## API end-points
+
+| Verb   | URI Pattern            | Controller#Action    |
+| ----   | -----------            | -----------------    |
+| POST   | `/sign-up`             | `users#signup`       |
+| POST   | `/sign-in`             | `users#signin`       |
+| DELETE | `/sign-out/:id`        | `users#signout`      |
+| PATCH  | `/change-password/:id` | `users#changepw`     |
+| GET    | `/foods`               | `foods#index`        |
+| POST   | `/foods`               | `foods#create`       |
+| GET    | `/foods/:id`           | `foods#show`         |
+| PATCH  | `/foods/:id`           | `foods#update`       |
+| DELETE | `/foods/:id`           | `foods#destroy`      |
+| GET    | `/meals`               | `meals#index`        |
+| POST   | `/meals`               | `meals#create`       |
+| GET    | `/meals/:id`           | `meals#show`         |
+| PATCH  | `/meals/:id`           | `meals#update`       |
+| DELETE | `/meals/:id`           | `meals#destroy`      | 
+| GET    | `/meals_items`         | `meals_items#index`  |
+| POST   | `/meals_items`         | `meals_items#create` |
+| GET    | `/meals_items/:id`     | `meals_items#show`   |
+| PATCH  | `/meals_items/:id`     | `meals_items#update` |
+| DELETE | `/meals_items/:id`     | `meals_items#destroy`|
+
+All data returned from API actions is formatted as JSON.
+    
+# Wire Frames
+
+[link] (https://app.moqups.com/louarnos/7K1jE6OVH6/view)
+
+## User actions
+
+*Summary:*
+
+<table>
+<tr>
+  <th colspan="3">Request</th>
+  <th colspan="2">Response</th>
+</tr>
+<tr>
+  <th>Verb</th>
+  <th>URI</th>
+  <th>body</th>
+  <th>Status</th>
+  <th>body</th>
+</tr>
+<tr>
+<td>POST</td>
+<td>`/sign-up`</td>
+<td><strong>credentials</strong></td>
+<td>201, Created</td>
+<td><strong>user</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>POST</td>
+<td>`/sign-in`</td>
+<td><strong>credentials</strong></td>
+<td>200 OK</td>
+<td><strong>user w/token</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>401 Unauthorized</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>`/sign-out/:id`</td>
+<td>empty</td>
+<td>201 Created</td>
+<td>empty</td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>401 Unauthorized</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>`/change-password/:id`</td>
+<td><strong>passwords</strong></td>
+<td>204 No Content</td>
+<td><strong>user w/token</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+</table>
+## User actions
+
+# User Stories
+
+- As a user I want to be able to search the database and see all entries containing keywords like “chicken"
+- As a user I want to be able to see my last 5 meals
+- As a user I want to be able to see my meals from a given date
+- As a user I want to have an ideal macronutrient breakdown and see if my meal meets the ideal
+
+# Things to improve
+
+In order of priority:
+
+- Make the foods table searchable by keyword
+- Create an calorie goal calculator based on users age, weight, gender, etc. with designated macronutrients breakdown
+- Total calories and macros for a given day.
+- Make meals searchable by date
+- Graph macronutrients of a given meal or day, and compare against goal designated by calculator.
+- Make meals searchable by name
+- Improve styling and flow of page
