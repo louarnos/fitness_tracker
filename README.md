@@ -54,6 +54,8 @@ Users have many meals. Meals have many foods through meal_items.
 | DELETE | `/meals_items/:id`     | `meals_items#destroy`|
 
 All data returned from API actions is formatted as JSON.
+
+Meal_items assoicated with a user's meal is deleted when an associated meal is deleted.
     
 # Wire Frames
 
