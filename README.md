@@ -1,15 +1,6 @@
-# What is Fitness Food Tracker?
+[Front End Repo](https://github.com/louarnos/FitnessTrackerFrontEnd)
 
-Fitness Food tracker is an app that allows users to create, store, and recall meals with access to a database of over 8000 foods. The nutritional information in the foods table was distributed by the USDA. Foods have attributes of a description, grams per serving, calories per serving, carbs, monosaturated fats, polysaturated fats, saturated fats, sugars, protein, sodium, cholesterol, and fiber.
-
-# Technologies Used
-
-Front End: [Repo](https://github.com/louarnos/FitnessTrackerFrontEnd)
- - Javascript
- - HTML
- - CSS
- - Jquery
- - Handlebars.js
+# Technologies Used For Back End
  
 Back End: 
  - Ruby
@@ -56,10 +47,7 @@ Users have many meals. Meals have many foods through meal_items.
 All data returned from API actions is formatted as JSON.
 
 Meal_items assoicated with a user's meal is deleted when an associated meal is deleted.
-    
-# Wire Frames
 
-[link] (https://app.moqups.com/louarnos/7K1jE6OVH6/view)
 
 ## User actions
 
@@ -125,24 +113,42 @@ Meal_items assoicated with a user's meal is deleted when an associated meal is d
   <td>400 Bad Request</td>
   <td><em>empty</em></td>
 </tr>
+<tr>
+<td>POST</td>
+<td>`/meals`</td>
+<td><strong>Meal Name</strong></td>
+<td>201 Created</td>
+<td><strong>user w/token</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>POST</td>
+<td>`/meals_items`</td>
+<td><strong>foods_for_meal</strong></td>
+<td>201 Created</td>
+<td><strong>user w/token</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>`/meals/:id`</td>
+<td><strong></strong></td>
+<td>204 No Content</td>
+<td><strong>user w/token</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
 </table>
 ## User actions
 
-# User Stories
-
-- As a user I want to be able to search the database and see all entries containing keywords like “chicken"
-- As a user I want to be able to see my last 5 meals
-- As a user I want to be able to see my meals from a given date
-- As a user I want to have an ideal macronutrient breakdown and see if my meal meets the ideal
-
-# Things to improve
-
-In order of priority:
-
-- Make the foods table searchable by keyword
-- Create an calorie goal calculator based on users age, weight, gender, etc. with designated macronutrients breakdown
-- Total calories and macros for a given day.
-- Make meals searchable by date
-- Graph macronutrients of a given meal or day, and compare against goal designated by calculator.
-- Make meals searchable by name
-- Improve styling and flow of page
