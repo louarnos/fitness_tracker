@@ -51,8 +51,6 @@ Meal_items assoicated with a user's meal is deleted when an associated meal is d
 
 ## User actions
 
-*Summary:*
-
 <table>
 <tr>
   <th colspan="3">Request</th>
@@ -113,11 +111,29 @@ Meal_items assoicated with a user's meal is deleted when an associated meal is d
   <td>400 Bad Request</td>
   <td><em>empty</em></td>
 </tr>
+</table>
+
+
+# Meal Actions
+
+<table>
 <tr>
-<td>POST</td>
+<td>GET</td>
 <td>`/meals`</td>
-<td><strong>Meal Name</strong></td>
-<td>201 Created</td>
+<td><strong></strong></td>
+<td>200 OK</td>
+<td><strong>user w/token</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>GET</td>
+<td>`/meals/:id`</td>
+<td><strong></strong></td>
+<td>200 OK</td>
 <td><strong>user w/token</strong></td>
 </tr>
 <tr>
@@ -127,8 +143,8 @@ Meal_items assoicated with a user's meal is deleted when an associated meal is d
 </tr>
 <tr>
 <td>POST</td>
-<td>`/meals_items`</td>
-<td><strong>foods_for_meal</strong></td>
+<td>`/meals`</td>
+<td><strong>Meal Name</strong></td>
 <td>201 Created</td>
 <td><strong>user w/token</strong></td>
 </tr>
@@ -149,6 +165,76 @@ Meal_items assoicated with a user's meal is deleted when an associated meal is d
   <td>400 Bad Request</td>
   <td><em>empty</em></td>
 </tr>
+<tr>
+<td>PATCH</td>
+<td>`/meals/:id`</td>
+<td><strong>New Meal Name</strong></td>
+<td>204 No Content</td>
+<td><strong>user w/token</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
 </table>
-## User actions
+
+# Meal_items Actions
+
+<table>
+<tr>
+<td>POST</td>
+<td>`/meals_items`</td>
+<td><strong>food ID</strong></td>
+<td>201 Created</td>
+<td><strong>user w/token</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+</table>
+
+
+#Foods Actions
+
+<table>
+<tr>
+<td>GET</td>
+<td>`/foods`</td>
+<td><strong></strong></td>
+<td>200 OK</td>
+<td><strong>user</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>GET</td>
+<td>`/foods/:id`</td>
+<td><strong></strong></td>
+<td>200 OK</td>
+<td><strong>user</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+<tr>
+<td>POST</td>
+<td>`/foods`</td>
+<td><strong>All Attributes for Food</strong></td>
+<td>201 Created</td>
+<td><strong>user</strong></td>
+</tr>
+<tr>
+  <td colspan="3"></td>
+  <td>400 Bad Request</td>
+  <td><em>empty</em></td>
+</tr>
+</table>
 
