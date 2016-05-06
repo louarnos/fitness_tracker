@@ -1,7 +1,7 @@
 class CreateFoods < ActiveRecord::Migration
   def change
     create_table :foods do |t|
-      t.string :desc
+      t.string :description
       t.integer :calories
       t.integer :grams_per_serving
       t.float :fat_sat

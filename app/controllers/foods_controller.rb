@@ -1,15 +1,15 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: [:show, :update, :destroy]
 
-  # GET /foods
-  # GET /foods.json
-  def search_by_key
-    @food = Food.search_by_key(params[:search_key])
+  def search
+    @food = Food.search(params[:key])
 
     render json: @food
   end
 
 
+  # GET /foods
+  # GET /foods.json
   def index
     @foods = Food.all
 
@@ -61,6 +61,8 @@ class FoodsController < ApplicationController
     end
 
     def food_params
-      params.require(:food).permit(:desc, :calories, :grams_per_serving, :fat_sat, :fat_mono, :fat_poly, :carbs, :sugar, :protein, :fiber, :sodium, :choles)
+      params.require(:food).permit(:description, :calories, :grams_per_serving,
+      :fat_sat, :fat_mono, :fat_poly, :carbs, :sugar, :protein, :fiber,
+      :sodium, :choles, :key)
     end
 end

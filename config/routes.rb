@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   patch '/change-password/:id' => 'users#changepw'
   patch '/meals/:id' => 'meals#update'
   get '/foods/:sodium' => 'foods#index'
+  get '/foods/search/:key' => 'foods#search'
   resources :users, only: [:index, :show]
 end

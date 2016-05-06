@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160428193656) do
   add_index "examples", ["user_id"], name: "index_examples_on_user_id", using: :btree
 
   create_table "foods", force: :cascade do |t|
-    t.string   "desc"
+    t.string   "description"
     t.integer  "calories"
     t.integer  "grams_per_serving"
     t.float    "fat_sat"

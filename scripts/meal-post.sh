@@ -5,7 +5,7 @@ curl --include --request POST http://localhost:3000/meal_items \
   --data '{
     "meal_item" : {
     "food_for_meal_id" : "4",
-    "user_meal_id" : "45"
+    "user_meal_id" : "68"
   }
 }'
 
