@@ -4,6 +4,12 @@ class MealsController < ProtectedController
 
   # GET /meals
   # GET /meals.json
+  def by_date
+    @meals = current_user.meals.find(params[:date])
+
+    render json: @mels
+  end
+
   def index
     @meals = current_user.meals
     render json: @meals
@@ -53,7 +59,7 @@ class MealsController < ProtectedController
   end
 
   def meal_params
-    params.require(:meal).permit(:meal_type, :meal_items, :food_for_meals)
+    params.require(:meal).permit(:meal_type, :meal_items, :food_for_meals, :date)
   end
 
   private :set_meal, :meal_params

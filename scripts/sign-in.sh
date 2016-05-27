@@ -1,10 +1,11 @@
 #!/bin/bash
 
-curl --include --request POST http://www.salty-river-32913.herokuapp.com/sign-in \
+curl --include --request POST http://localhost:3000/sign-in \
   --header "Content-Type: application/json" \
   --data '{
     "credentials": {
-      "email": "lol@lol.com",
-      "password": "lol"
+      "email": "another@example.email",
+      "password": "an example password",
+      "password_confirmation": "an example password"
     }
   }'

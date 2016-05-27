@@ -1,11 +1,11 @@
-TOKEN='BAhJIiU2ZjA5YWUzYmNkMzc4ZjFhZjc5Y2ZjNzU4M2ZjZTcxZQY6BkVG--bd4a857908df5f3bc9015aa3e7b2cf89cb710c79'
+TOKEN='BAhJIiU5NTVhOTc2OThmMDc4NWJlMzdmMDYwZmUzNjM3NzQwMQY6BkVG--c3a4f634a065a7029e6cfee5256bddebb2c9cc13'
 
 curl --include --request POST http://localhost:3000/meal_items \
   --header "Content-Type: application/json" \
   --data '{
     "meal_item" : {
     "food_for_meal_id" : "4",
-    "user_meal_id" : "68"
+    "user_meal_id" : "1"
   }
 }'
 

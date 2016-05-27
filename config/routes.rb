@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   patch '/meals/:id' => 'meals#update'
   get '/foods/:sodium' => 'foods#index'
   get '/foods/search/:key' => 'foods#search'
+  get '/meals/date/:date' => 'meals#by_date'
   resources :users, only: [:index, :show]
 end
